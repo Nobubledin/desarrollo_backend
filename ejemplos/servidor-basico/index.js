@@ -1,3 +1,5 @@
+'use strict';
+
 // cargar la librería http
 const http = require('http');
 const Chance = require('chance');
