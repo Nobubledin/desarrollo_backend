@@ -22,8 +22,9 @@ function Agente(nombre) {
 }
 
 // heredar las propiedades de las personas
-Agente.prototype = Object.create(Persona.prototype);
-Agente.prototype.constructor = Agente;
+// Agente.prototype = Object.create(Persona.prototype);
+// Agente.prototype.constructor = Agente;
+Object.setPrototypeOf(Agente.prototype, Persona.prototype);
 
 const smith = new Agente('Smith');
 
