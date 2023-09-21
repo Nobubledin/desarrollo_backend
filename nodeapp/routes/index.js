@@ -36,9 +36,12 @@ router.get('/parametro_opcional/:numero?', (req, res, next) => {
 // GET /producto/pantalones/talla/34/color/azul
 router.get('/producto/:nombre/talla/:talla/color/:color', (req, res, next) => {
   console.log(req.params)
-  const nombre = req.params.nombre;
-  const talla = req.params.talla;
-  const color = req.params.color;
+
+  // const nombre = req.params.nombre;
+  // const talla = req.params.talla;
+  // const color = req.params.color;
+  const { nombre, talla, color } = req.params;
+
   res.send(`Me pediste ${nombre} talla ${talla} color ${color}`);
 });
 
