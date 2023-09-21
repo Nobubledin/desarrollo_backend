@@ -19,4 +19,28 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+// GET /parametro_en_ruta/66
+router.get('/parametro_en_ruta/:numero', (req, res, next) => {
+  const numero = req.params.numero;
+
+  res.send('he recibido el número: ' + numero);
+});
+
+// GET /parametro_opcional/66
+router.get('/parametro_opcional/:numero?', (req, res, next) => {
+  const numero = req.params.numero;
+
+  res.send('(opcional) he recibido el número: ' + numero);
+});
+
+// GET /producto/pantalones/talla/34/color/azul
+router.get('/producto/:nombre/talla/:talla/color/:color', (req, res, next) => {
+  console.log(req.params)
+  const nombre = req.params.nombre;
+  const talla = req.params.talla;
+  const color = req.params.color;
+  res.send(`Me pediste ${nombre} talla ${talla} color ${color}`);
+});
+
+
 module.exports = router;
