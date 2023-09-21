@@ -19,4 +19,10 @@ router.get('/', function(req, res, next) {
 
 });
 
+// POST /users (body)
+router.post('/', (req, res, next) => {
+  console.log(req.body);
+  res.send('recibido');
+});
+
 module.exports = router;
