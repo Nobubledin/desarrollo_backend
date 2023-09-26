@@ -17,6 +17,9 @@ router.get('/', async (req, res, next) => {
     // ordenación
     // http://127.0.0.1:3000/api/agentes?sort=-age%20name
     const sort = req.query.sort;
+    // field selection
+    // http://localhost:3000/api/agentes?fields=name%20-_id%20address
+    const fields = req.query.fields;
 
     const filtro = {};
 
@@ -28,7 +31,7 @@ router.get('/', async (req, res, next) => {
       filtro.age = filtreByAge;
     }
 
-    const agentes = await Agente.lista(filtro, skip, limit, sort);
+    const agentes = await Agente.lista(filtro, skip, limit, sort, fields);
 
     res.json({ results: agentes })
 
