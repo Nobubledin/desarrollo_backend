@@ -15,6 +15,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// GET /api/agentes/(_id)
+// Devuelve un agente
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
 
+    const agente = await Agente.findById(id);
+
+    res.json({ result: agente });
+  } catch (err) {
+    next(err);
+  }
+})
 
 module.exports = router;
