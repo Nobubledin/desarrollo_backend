@@ -45,5 +45,23 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+// POST /api/agentes
+// Crea un agente
+router.post('/', async (req, res, next) => {
+  try {
+    const agenteData = req.body;
+
+    // creamos una instancia de agente en memoria
+    const agente = new Agente(agenteData);
+
+    // la persistimos en la BD
+    const agenteGuardado = await agente.save();
+
+    res.json({ result: agenteGuardado });
+
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
