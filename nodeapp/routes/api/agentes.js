@@ -7,11 +7,16 @@ const Agente = require('../../models/Agente');
 router.get('/', async (req, res, next) => {
   try {
     // filtros
+    // http://127.0.0.1:3000/api/agentes?name=Jones
     const filterByName = req.query.name;
     const filtreByAge = req.query.age;
     // paginación
+    // http://127.0.0.1:3000/api/agentes?skip=2&limit=2
     const skip = req.query.skip;
     const limit = req.query.limit;
+    // ordenación
+    // http://127.0.0.1:3000/api/agentes?sort=-age%20name
+    const sort = req.query.sort;
 
     const filtro = {};
 
@@ -23,7 +28,7 @@ router.get('/', async (req, res, next) => {
       filtro.age = filtreByAge;
     }
 
-    const agentes = await Agente.lista(filtro, skip, limit);
+    const agentes = await Agente.lista(filtro, skip, limit, sort);
 
     res.json({ results: agentes })
 
