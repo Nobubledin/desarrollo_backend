@@ -6,11 +6,6 @@ var logger = require('morgan');
 
 require('./lib/connectMongoose');
 
-const Agente = require('./models/Agente');
-Agente.find().then((results) => {
-  console.log(results);
-}).catch(err => console.log(err))
-
 var app = express();
 
 // view engine setup
@@ -34,6 +29,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   next('zzz');
 // });
 
+/**
+ * Rutas del API
+ */
+app.use('/api/agentes', require('./routes/api/agentes'));
+
+/**
+ * Rutas del website
+ */
 app.use('/',      require('./routes/index'));
 app.use('/users', require('./routes/users'));
 
