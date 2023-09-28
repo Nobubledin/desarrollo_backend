@@ -5,6 +5,7 @@ const { setTimeout: sleep } = require('node:timers/promises');
 const csvParser = require('papaparse');
 const { MongoClient } = require('mongodb');
 const ProgressBar = require('progress');
+const { RateLimiter } = require('limiter');
 
 const inputFile = './test.csv';
 const outputFile = './test_out.csv';
@@ -32,12 +33,18 @@ async function main() {
     dynamicTyping: true
   });
 
+  // creamos la barra de progreso
   const bar = new ProgressBar('[:bar] :rate/rps :percent :etas', {
     width: 50,
     total: rows.length
-  })
+  });
+
+  // creamos el rate limiter
+  const rateLimiter = new RateLimiter({ tokensPerInterval: 10, interval: "second" });
 
   for (const [index, row] of rows.entries()) {
+
+    await rateLimiter.removeTokens(1);
 
     // buscamnos el agente en la base de datos
     const agente = await collection.findOne({ name: row.name });
