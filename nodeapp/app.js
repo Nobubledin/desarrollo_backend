@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
+const swaggerMiddleware = require('./lib/swaggerMiddleware');
 
 require('./lib/connectMongoose');
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Rutas del API
  */
+app.use('/api-doc', swaggerMiddleware);
 app.use('/api/agentes', basicAuthMiddleware, require('./routes/api/agentes'));
 
 /**
