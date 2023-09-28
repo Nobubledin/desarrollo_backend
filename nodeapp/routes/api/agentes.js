@@ -2,8 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Agente = require('../../models/Agente');
 
-// GET /api/agentes
-// Devuelve una lista de agentes
+/**
+ * @openapi
+ * /api/agentes:
+ *  get:
+ *   description: Devuelve una lista de agentes
+ *   responses:
+ *    200:
+ *     description: Devuelve JSON
+ */
 router.get('/', async (req, res, next) => {
   try {
     // filtros
