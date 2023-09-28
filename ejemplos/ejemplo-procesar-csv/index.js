@@ -1,8 +1,10 @@
 'use strict';
 
 const { readFile, writeFile } = require('node:fs/promises');
+const { setTimeout: sleep } = require('node:timers/promises');
 const csvParser = require('papaparse');
 const { MongoClient } = require('mongodb');
+const ProgressBar = require('progress');
 
 const inputFile = './test.csv';
 const outputFile = './test_out.csv';
@@ -30,21 +32,27 @@ async function main() {
     dynamicTyping: true
   });
 
+  const bar = new ProgressBar('[:bar] :rate/rps :percent :etas', {
+    width: 50,
+    total: rows.length
+  })
+
   for (const [index, row] of rows.entries()) {
 
     // buscamnos el agente en la base de datos
     const agente = await collection.findOne({ name: row.name });
 
-    console.log('Document', index, row.name, '=>',
-      agente ? agente._id : 'Not found!'
-    );
+    // console.log('Document', index, row.name, '=>',
+    //   agente ? agente._id : 'Not found!'
+    // );
 
     // si lo encuentro actualizo la fila
     if (agente) {
       row.age = agente.age;
       row._id = agente._id;
     }
-
+    bar.tick(1);
+    await sleep(20);
   }
 
 
