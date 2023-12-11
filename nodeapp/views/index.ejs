@@ -7,13 +7,13 @@
   <body>
     <% include cabecera.ejs %>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p><%= __('Welcome to') %> <%= title %></p>
 
     <p><%= texto + '!' %></p>
 
     <p><%= nombre %></p>
 
-    <h2>Condicionales</h2>
+    <h2><%= __('Condicionales') %></h2>
     <% if (esPar) { %>
       <p>El segundo actual es par.</p>
     <% } else { %>
@@ -22,7 +22,7 @@
 
     <p>Segundo actual: <%= segundoActual %></p>
 
-    <h2>Bucles</h2>
+    <h2><%= __('Bucles') %></h2>
     <% usuarios.forEach(usuario => { %>
       <p>El agente <%= usuario.nombre %>
          tiene <%= usuario.edad %> años.

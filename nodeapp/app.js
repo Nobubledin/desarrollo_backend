@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
+const i18n = require('./lib/i18nConfigure');
 
 require('./lib/connectMongoose');
 
@@ -40,6 +41,7 @@ app.use('/api/agentes', basicAuthMiddleware, require('./routes/api/agentes'));
 /**
  * Rutas del website
  */
+app.use(i18n.init);
 app.use('/',      require('./routes/index'));
 app.use('/users', require('./routes/users'));
 
