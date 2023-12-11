@@ -44,6 +44,7 @@ app.use('/api/agentes', basicAuthMiddleware, require('./routes/api/agentes'));
 app.use(i18n.init);
 app.use('/',      require('./routes/index'));
 app.use('/users', require('./routes/users'));
+app.use('/features', require('./routes/features'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
