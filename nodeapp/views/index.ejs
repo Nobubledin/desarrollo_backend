@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <% include cabecera.ejs %>
+<% include cabecera.ejs %>
+
     <h1><%= title %></h1>
     <p><%= __('Welcome to') %> <%= title %></p>
 
@@ -35,5 +29,5 @@
     <p>Hay 2 <%= __n('Mouse', 2) %></p>
     <p>Hay 3 <%= __n('Mouse', 3) %></p>
 
-  </body>
-</html>
+<% include pie.ejs %>
+
