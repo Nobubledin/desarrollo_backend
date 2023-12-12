@@ -6,6 +6,7 @@ var logger = require('morgan');
 const session = require('express-session');
 const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
+const sessionAuthMiddleware = require('./lib/sessionAuthMiddleware');
 const i18n = require('./lib/i18nConfigure');
 const FeaturesController = require('./controllers/FeaturesController');
 const LangController = require('./controllers/LangController');
@@ -68,7 +69,7 @@ app.get('/features', featuresController.index);
 app.get('/change-locale/:locale', langController.changeLocale);
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
-app.get('/privado', privadoController.index);
+app.get('/privado', sessionAuthMiddleware, privadoController.index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
