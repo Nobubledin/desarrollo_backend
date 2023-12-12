@@ -16,7 +16,7 @@ class LoginController {
       const usuario = await Usuario.findOne({ email: email });
 
       // si no lo encuentro o la contraseña no coincide --> error
-      if (!usuario || usuario.password !== password) {
+      if (!usuario || !(await usuario.comparePassword(password)) ) {
         res.locals.error = req.__('Invalid credentials');
         res.locals.email = email;
         res.render('login');
