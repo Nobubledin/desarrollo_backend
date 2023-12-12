@@ -8,6 +8,7 @@ const swaggerMiddleware = require('./lib/swaggerMiddleware');
 const i18n = require('./lib/i18nConfigure');
 const FeaturesController = require('./controllers/FeaturesController');
 const LangController = require('./controllers/LangController');
+const LoginController = require('./controllers/LoginController');
 
 require('./lib/connectMongoose');
 
@@ -45,6 +46,7 @@ app.use('/api/agentes', basicAuthMiddleware, require('./routes/api/agentes'));
  */
 const featuresController = new FeaturesController();
 const langController = new LangController();
+const loginController = new LoginController();
 
 app.use(i18n.init);
 app.use('/',      require('./routes/index'));
@@ -52,6 +54,7 @@ app.use('/users', require('./routes/users'));
 // app.use('/features', require('./routes/features'));
 app.get('/features', featuresController.index);
 app.get('/change-locale/:locale', langController.changeLocale);
+app.get('/login', loginController.index)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
