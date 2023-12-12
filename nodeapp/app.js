@@ -6,6 +6,8 @@ var logger = require('morgan');
 const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
 const i18n = require('./lib/i18nConfigure');
+const FeaturesController = require('./controllers/FeaturesController');
+const LangController = require('./controllers/LangController');
 
 require('./lib/connectMongoose');
 
@@ -41,11 +43,15 @@ app.use('/api/agentes', basicAuthMiddleware, require('./routes/api/agentes'));
 /**
  * Rutas del website
  */
+const featuresController = new FeaturesController();
+const langController = new LangController();
+
 app.use(i18n.init);
 app.use('/',      require('./routes/index'));
 app.use('/users', require('./routes/users'));
-app.use('/features', require('./routes/features'));
-app.use('/change-locale', require('./routes/change-locale'));
+// app.use('/features', require('./routes/features'));
+app.get('/features', featuresController.index);
+app.get('/change-locale/:locale', langController.changeLocale);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
