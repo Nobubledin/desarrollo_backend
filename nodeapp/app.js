@@ -13,6 +13,7 @@ const FeaturesController = require('./controllers/FeaturesController');
 const LangController = require('./controllers/LangController');
 const LoginController = require('./controllers/LoginController');
 const PrivadoController = require('./controllers/PrivadoController');
+const AgentesController = require('./controllers/AgentesController');
 
 require('./lib/connectMongoose');
 
@@ -52,6 +53,7 @@ const featuresController = new FeaturesController();
 const langController = new LangController();
 const loginController = new LoginController();
 const privadoController = new PrivadoController();
+const agentesController = new AgentesController();
 
 app.use(i18n.init);
 app.use(session({
@@ -78,6 +80,8 @@ app.get('/login', loginController.index);
 app.post('/login', loginController.post);
 app.get('/logout', loginController.logout);
 app.get('/privado', sessionAuthMiddleware, privadoController.index);
+app.get('/agentes-new', sessionAuthMiddleware, agentesController.new);
+app.post('/agentes-new', sessionAuthMiddleware, agentesController.postNewAgent);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
