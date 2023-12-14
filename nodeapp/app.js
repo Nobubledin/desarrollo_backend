@@ -62,7 +62,7 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 2 // 2d - expiración de la sesión por inactividad
   },
-  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/cursonode'})
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI})
 }));
 // hacemos que el objeto session esté disponible al renderizar las vistas
 app.use((req, res, next) => {

@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const readline = require('node:readline');
 const connection = require('./lib/connectMongoose');
 const initData = require('./init-db-data.json');
