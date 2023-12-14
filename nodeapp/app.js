@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
@@ -60,7 +61,8 @@ app.use(session({
   resave: false, // Forces the session to be saved back to the session store, even if the session was never modified during the request
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 2 // 2d - expiración de la sesión por inactividad
-  }
+  },
+  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/cursonode'})
 }));
 // hacemos que el objeto session esté disponible al renderizar las vistas
 app.use((req, res, next) => {
