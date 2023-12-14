@@ -79,9 +79,11 @@ app.get('/change-locale/:locale', langController.changeLocale);
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
 app.get('/logout', loginController.logout);
+// Zona privada del usuario
 app.get('/privado', sessionAuthMiddleware, privadoController.index);
 app.get('/agentes-new', sessionAuthMiddleware, agentesController.new);
 app.post('/agentes-new', sessionAuthMiddleware, agentesController.postNewAgent);
+app.get('/agentes-delete/:agenteId', sessionAuthMiddleware, agentesController.deleteAgent)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -20,7 +20,7 @@
                         <th scope="col" style="width: 10%;">#</th>
                         <th scope="col">Agent</th>
                         <th scope="col" style="width: 10%;">Age</th>
-                        <th scope="col"><a href="/agentes-new">New agent</a></th>
+                        <th scope="col" style="width: 10%;"><a href="/agentes-new">New agent</a></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -29,7 +29,11 @@
                             <th scope="row"><%= agente._id %></th>
                             <td><%= agente.name %></td>
                             <td><%= agente.age  %></td>
-                            <td></td>
+                            <td><a
+                                onclick="confirmDeleteAgent('<%= agente.name %>', '<%= agente._id %>')"
+                                href="javascript:void(0);">
+                                    <i class="bi bi-trash"></i>
+                            </a></td>
                         </tr>
                       <% }) %>
                     </tbody>
@@ -38,4 +42,13 @@
         </div>
     </div>
 </section>
+
+<script>
+    function confirmDeleteAgent(name, agenteId) {
+        if (confirm(`Estas seguro que quieres eliminar el agente ${name}?`)) {
+            window.location.href = `/agentes-delete/${agenteId}`;
+        }
+    }
+</script>
+
 <% include pie.ejs %>
