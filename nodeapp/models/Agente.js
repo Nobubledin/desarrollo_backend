@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const agenteSchema = mongoose.Schema({
   name: { type: String, index: true },
   age: { type: Number, index: true, min: 18, max: 120 },
+  owner: { ref: 'Usuario', type: mongoose.Schema.Types.ObjectId },
 }, {
   // collection: 'agentes' // para forzar un nombre concreto de colección
 });

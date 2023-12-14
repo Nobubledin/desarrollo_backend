@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const readline = require('node:readline');
 const connection = require('./lib/connectMongoose');
-const initData = require('./init-db-data.json');
 
 const { Agente, Usuario } = require('./models');
 
@@ -23,9 +22,9 @@ async function main() {
     process.exit();
   }
 
-  // inicializar la colección de agentes
-  await initAgentes();
   await initUsuarios();
+
+  await initAgentes();
 
   connection.close();
 }
@@ -35,8 +34,17 @@ async function initAgentes() {
   const deleted = await Agente.deleteMany();
   console.log(`Eliminados ${deleted.deletedCount} agentes.`);
 
+  const [ adminUser, usuario1User ] = await Promise.all([
+    Usuario.findOne({ email: 'admin@example.com'}),
+    Usuario.findOne({ email: 'usuario1@example.com' })
+  ])
+
   // crear agentes iniciales
-  const inserted = await Agente.insertMany(initData.agentes);
+  const inserted = await Agente.insertMany([
+    { "name": "Smith", "age": 33, owner: adminUser._id },
+    { "name": "Jones", "age": 23, owner: adminUser._id },
+    { "name": "Brown", "age": 46, owner: usuario1User._id }
+  ]);
   console.log(`Creados ${inserted.length} agentes.`);
 }
 
