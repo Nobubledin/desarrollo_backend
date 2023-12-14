@@ -2,12 +2,38 @@
   <!-- Basic features section-->
   <section class="bg-light">
     <div class="container px-5">
+
         <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
             <div class="col-12 col-lg-5">
-
                 <h2 class="display-4 lh-1 mb-4"><%= __('Private zone') %></h2>
+            </div>
+            <div class="col-12 col-lg-5">
                 <p>User: <%= email %></p>
+            </div>
+        </div>
 
+        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+            <div class="col-12 col-lg-12">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="width: 10%;">#</th>
+                        <th scope="col">Agent</th>
+                        <th scope="col" style="width: 10%;">Age</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% agentes.forEach( agente => { %>
+                        <tr>
+                            <th scope="row"><%= agente._id %></th>
+                            <td><%= agente.name %></td>
+                            <td><%= agente.age  %></td>
+                            <td></td>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
             </div>
         </div>
     </div>
