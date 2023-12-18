@@ -13,6 +13,10 @@ const Agente = require('../../models/Agente');
  */
 router.get('/', async (req, res, next) => {
   try {
+
+    // escribimos en el log el id del usuario logado en el API con JWT
+    const usuarioIdLogado = req.usuarioLogadoAPI;
+
     // filtros
     // http://127.0.0.1:3000/api/agentes?name=Jones
     const filterByName = req.query.name;
@@ -37,6 +41,8 @@ router.get('/', async (req, res, next) => {
     if (filtreByAge) {
       filtro.age = filtreByAge;
     }
+
+    filtro.owner = usuarioIdLogado;
 
     const agentes = await Agente.lista(filtro, skip, limit, sort, fields);
 

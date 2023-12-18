@@ -5,9 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
-const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
+const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const sessionAuthMiddleware = require('./lib/sessionAuthMiddleware');
+const jwtAuthMiddleware = require('./lib/jwtAuthMiddleware');
 const i18n = require('./lib/i18nConfigure');
 const FeaturesController = require('./controllers/FeaturesController');
 const LangController = require('./controllers/LangController');
@@ -47,7 +48,7 @@ const loginController = new LoginController();
  */
 app.use('/api-doc', swaggerMiddleware);
 app.post('/api/login', loginController.postJWT);
-app.use('/api/agentes', require('./routes/api/agentes'));
+app.use('/api/agentes', jwtAuthMiddleware, require('./routes/api/agentes'));
 
 /**
  * Rutas del website

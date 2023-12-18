@@ -59,7 +59,7 @@ class LoginController {
       }
 
       // si existe y la contraseña coincide --> devuelvo un JWT
-      const tokenJWT = await jwt.sign({ _id: usuario._id }, 's876ads87dasuytasduytasd', {
+      const tokenJWT = await jwt.sign({ _id: usuario._id }, process.env.JWT_SECRET, {
         expiresIn: '2h'
       });
       res.json({ jwt: tokenJWT });
