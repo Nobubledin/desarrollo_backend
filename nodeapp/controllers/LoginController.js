@@ -27,6 +27,11 @@ class LoginController {
       // si existe y la contraseña coincide --> zona privada
       // apuntar en la sesión del usuario, que está autenticado
       req.session.usuarioLogado = usuario._id;
+
+      // enviar email al usuario
+      const emailResult = await usuario.sendEmail('Bienvenido', 'Bienvenido a NodeApp');
+      console.log('Email enviado', emailResult);
+
       res.redirect('/privado');
 
     } catch (err) {
