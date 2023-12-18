@@ -30,7 +30,6 @@ class LoginController {
 
       // enviar email al usuario
       const emailResult = await usuario.sendEmail('Bienvenido', 'Bienvenido a NodeApp');
-      console.log('Email enviado', emailResult);
 
       res.redirect('/privado');
 
