@@ -29,8 +29,16 @@ $ npm run init-db
 
 In production:
 
+* Start the application
+
 ```sh
 npm start
+```
+
+* Start email sender service
+
+```sh
+npm run email-sender-service
 ```
 
 In development:
