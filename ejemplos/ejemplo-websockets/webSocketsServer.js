@@ -12,7 +12,11 @@ module.exports = (server) => {
       console.log('mensaje recibido de un cliente', texto);
       // reenviar el mensaje a todos los sockets conectados
       io.emit('mensaje-desde-el-servidor', texto);
-    })
+    });
+
+    setInterval(() => {
+      socket.emit('noticia', 'noticia numero' + Date.now())
+    }, 2000);
 
   });
 }

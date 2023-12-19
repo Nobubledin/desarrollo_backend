@@ -42,6 +42,12 @@
           // añadir el texto a la lista
           const li = $('<li>').text(texto);
           $('#messages').append(li);
+        });
+
+        socket.on('noticia', texto => {
+          const textoCompleto = 'Nueva noticia!: ' + texto
+          const li = $('<li>').text(textoCompleto);
+          $('#messages').append(li);
         })
 
       });
