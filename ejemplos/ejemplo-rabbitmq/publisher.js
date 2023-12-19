@@ -41,7 +41,7 @@ async function main() {
     });
 
     console.log('enviado mensaje', mensaje);
-    // await sleep(1);
+    await sleep(100);
   }
 
 }

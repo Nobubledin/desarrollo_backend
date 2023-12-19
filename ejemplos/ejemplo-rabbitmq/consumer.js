@@ -22,7 +22,7 @@ async function main() {
     durable: true, // the queue will survive broker restarts
   });
 
-  canal.prefetch(1); // pending ack's
+  canal.prefetch(100); // pending ack's
 
   canal.consume(QUEUE, async mensaje => {
     const payload = mensaje.content.toString();
