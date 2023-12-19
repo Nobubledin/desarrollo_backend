@@ -26,7 +26,23 @@
 
     <script>
       $(function () {
+        const socket = io();
 
+        // enviar mensajes al servidor
+        $('form').submit(() => {
+          const texto = $('#m').val();
+
+          socket.emit('nuevo-mensaje', texto);
+          $('#m').val(''); // limpio el input
+          return false;
+        });
+
+        // recibir mensajes desde el servidor
+        socket.on('mensaje-desde-el-servidor', texto => {
+          // añadir el texto a la lista
+          const li = $('<li>').text(texto);
+          $('#messages').append(li);
+        })
 
       });
     </script>
