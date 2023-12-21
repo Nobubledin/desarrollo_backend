@@ -1,13 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Counter from '../components/Counter';
 ---
 <Layout title="Pagina 2">
 <p>Esta es la página 2</p>
+
+<Counter client:visible></Counter>
+
 <a href="/">Volver a la home</a>
 </Layout>
 
 <style>
   html {
     background-color: white;;
+  }
+  a {
+    color: lightblue;
+    text-decoration: underline;;
   }
 </style>
