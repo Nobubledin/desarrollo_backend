@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const emailTransportConfigure = require('../lib/emailTransportConfigure');
 const nodemailer = require('nodemailer');
 const canalPromise = require('../lib/rabbitMQLib');
+const { Requester } = require('cote');
+
+const requester = new Requester({ name: 'nodeapp-email' });
 
 // creamos esquema
 const usuarioSchema = mongoose.Schema({
@@ -57,6 +60,17 @@ usuarioSchema.methods.sendEmailRabbitMQ = async function(asunto, cuerpo) {
     persistent: true, // the message will survive broker restarts
   });
 
+}
+
+usuarioSchema.methods.sendEmailCote = async function(asunto, cuerpo) {
+  const evento = {
+    type: 'enviar-email',
+    from: process.env.EMAIL_SERVICE_FROM,
+    to: this.email,
+    subject: asunto,
+    html: cuerpo
+  }
+  return new Promise(resolve => requester.send(evento, resolve));
 }
 
 // creamos el modelo

@@ -38,7 +38,9 @@ npm start
 * Start email sender service
 
 ```sh
-npm run email-sender-service
+npm run email-sender-rabbitmq
+# or
+npm run email-sender-cote
 ```
 
 In development:
